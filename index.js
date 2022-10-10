@@ -6,7 +6,8 @@ var handle = {};
 handle["/"] = requestHandlers.init;
 handle["/home"] =requestHandlers.init;
 handle["/register"]=requestHandlers.register;
-handle["/game-app"]=requestHandlers.login;
+handle["/login"]=requestHandlers.login;
+handle["/game-app"]=requestHandlers.gameApp;
 
 
 
