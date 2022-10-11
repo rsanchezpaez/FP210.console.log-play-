@@ -2,6 +2,7 @@ var querystring = require("querystring");
 var fs = require("fs");
 var userRegisters= new Array();
 
+
 function init(response, postData){
 
     console.log("Request handler 'init' has been called");
@@ -80,7 +81,6 @@ function register(response){
     
 }
 function gameApp(response){
-    
     fs.readFile("./vistas/game-app.html", function(err, data){
         if(err){
             throw err;
@@ -103,10 +103,259 @@ function postData(response, postData){
 
 }
 
+function serveImg(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
 
+    fs.readFile("./assets/avatars/guerrera.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+     //SE BLOQUEA 
+    /*
+    if(idpath === 1){
+        fs.readFile("./assets/avatars/guerrera.png", function(err, data){
+            if(err){
+                console.log(err)
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 2){
+        fs.readFile("./assets/avatars/guerrero.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 3){
+        fs.readFile("./assets/avatars/arquera.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 4){
+        fs.readFile("./assets/avatars/arquero.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 5){
+        fs.readFile("./assets/avatars/maga.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 6){
+        fs.readFile("./assets/avatars/mago.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 7){
+        fs.readFile("./assets/avatars/monstrua.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+    if(idpath === 7){
+
+        fs.readFile("./assets/avatars/monstruo.png", function(err, data){
+            if(err){
+                throw err;
+            }
+            console.log(data)
+            response.writeHead(200, {"Content-Type": "image/jpeg"});
+            response.write(data);
+            response.end();
+        })
+    }
+
+*/
+
+   
+}
+function serveImg2(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/guerrero.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
+function serveImg3(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/arquera.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
+function serveImg4(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/arquero.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
+function serveImg5(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/maga.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
+function serveImg6(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/mago.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
+function serveImg7(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/monstrua.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
+function serveImg8(response, postData ,idpath){
+    console.log("Entro")
+    console.log("El id ha llegado como: ", idpath)
+
+    fs.readFile("./assets/avatars/monstruo.png", function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        console.log(data)
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+    
+
+   
+}
 
 exports.init = init;
 exports.login = login;
 exports.postData= postData;
 exports.register = register;
 exports.gameApp = gameApp;
+exports.serveImg = serveImg;
+exports.serveImg2 = serveImg2;
+exports.serveImg3 = serveImg3;
+exports.serveImg4 = serveImg4;
+exports.serveImg5 = serveImg5;
+exports.serveImg6 = serveImg6;
+exports.serveImg7 = serveImg7;
+exports.serveImg8 = serveImg8;
+
+
+
+    
+    

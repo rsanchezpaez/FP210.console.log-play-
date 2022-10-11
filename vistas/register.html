@@ -9,10 +9,40 @@
                 border:2px solid #ff910a;
                 box-shadow: 1px 1px 8px#ff910a;
             }
+            .avatar-picker{
+                display: none;
+                width: 80%;
+                margin-left: 30px;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-around;
+                align-items: center;
+                padding: 30px 0px 30px 0px;
+            }
             .avatar-wrapper{
                 display: flex;
-                width: 20px;
+                width: 100%;
+                justify-content:center;
+                align-items: center;
+                padding-bottom: 30px;
+            }
+            .avatar-content{
+                display: flex;
+                width: 90px;
+                height: 90px;
                 border-radius: 100%;
+                background-color: #ff910a;
+                
+            }
+            .avatar-item{
+                display: flex;
+                width: 50px;
+                height: 50px;
+                border-radius: 100%;
+                border:solid rgb(0, 0, 0);
+                background-color: #ff910a;
+                
+                
             }
             .avatar{
                 width: 100%;
@@ -23,16 +53,44 @@
     </head>
     <body>
         <div class="wrapper-main" style="width:100%; height: 800px; display: flex; justify-content:center; align-items: center; background-color: rgb(174, 253, 140);">
-            <div class="" style="width:20; border: solid rgb(58, 140, 255); padding: 20px;border-radius: 10px;background-color: rgb(58, 140, 255); box-shadow: rgb(51, 109, 190) 10px 5px 10px;">
+            <div class="" style="width:30%; border: solid rgb(58, 140, 255); padding: 20px;border-radius: 10px;background-color: rgb(58, 140, 255); box-shadow: rgb(51, 109, 190) 10px 5px 10px;">
+                <div class="avatar-picker" id="avatar-selector">
+                    <div class="avatar-item" id="item-1">
+                      <img class="avatar" src="http://localhost:8888/assets/avatars?1">
+                    </div>
+                    <div class="avatar-item" id="item-2">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars2?2">
+                    </div>
+                    <div class="avatar-item" id="item-3">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars3?3">
+                    </div>
+                    <div class="avatar-item" id="item-4">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars4?4">
+                    </div>
+                    <div class="avatar-item" id="item-4">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars5?5">
+                    </div>
+                    <div class="avatar-item" id="item-4">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars6?6">
+                    </div>
+                    <div class="avatar-item" id="item-4">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars7?7">
+                    </div>
+                    <div class="avatar-item" id="item-4">
+                        <img class="avatar" src="http://localhost:8888/assets/avatars8?8">
+                    </div>
+                </div>
                 <form action="/home" method="post">
                     <div class="avatar-wrapper">
-                        <img class="avatar" alt="avatar image">
+                        <div class="avatar-content" id="avatar-picker">
+                            <img class="avatar" src="/assets/avatars">
+                        </div>
                     </div>
                     
                     <div class="mb-3 row">
                         <label for="email" class="col-sm-2 col-form-label text-light">Name</label>
                         <div class="col-sm-9 px-4">
-                            <input style="margin-left: 20px;" type="text" class="form-control" id="email" name="name">
+                            <input style="margin-left: 20px;" type="text" class="form-control" id="name" name="name">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -46,7 +104,7 @@
                         <div class="col-sm-9 px-4">
                             <input style="margin-left: 20px;" type="password" class="form-control" id="password" name="password">
                         </div>
-                    </div>
+                    </div> 
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary btn btn-outline-warning" type="submit">Sign in</button>
                     </div>
@@ -59,6 +117,34 @@
             //GET AVATAR LINK: GIVE 4 - 6 OPTIONS
             //THE IMAGES HAVE TO BE HIDDEN UNTIL THE USER PRESS TO CHOOSE
             //CHOOSE AVATAR: GET ELEMENT BY ID... AND SEND IN THE FORM
+          /*
+          TEST THE IMG SERVE
+            fetch('/assets/avatars', {
+                method: 'GET',
+                headers: {'content-type': 'text/plain'},
+                }).then(response => console.log(response))
+                .then(data => console.log(data))
+
+
+          */
+           
+
+            var avatarPicker = document.getElementById("avatar-picker");
+
+            avatarPicker.addEventListener("click", function(){
+                console.log("pressed")
+                document.getElementById('avatar-selector').style.display = 'flex';
+            })
+
+            var input = document.getElementsByClassName("form-control");
+            for(var i = 0; i <input.length ; i++){
+                console.log(input[i]);
+                input[i].addEventListener("click", function(){
+                document.getElementById('avatar-selector').style.display = 'none';
+            })
+            }
+            
+           
         </script>
     </body>
 </html>

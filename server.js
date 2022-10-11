@@ -13,8 +13,9 @@ var url = require("url");
 function init(route, handle){
     function onRequest(request, response){
         var pathname = url.parse(request.url).pathname;
+        var idpath = url.parse(request.url).query;
         var postData = "";
-        
+        console.log(idpath)
         request.setEncoding("utf-8");
         request.addListener("data", function(textPost){
             postData += textPost;
@@ -22,7 +23,7 @@ function init(route, handle){
         });
 
         request.addListener("end", function(){
-            route(handle, pathname, response, postData);
+            route(handle, pathname, response, postData, idpath);
         });
 
     }
