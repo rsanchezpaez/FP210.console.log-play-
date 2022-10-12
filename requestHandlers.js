@@ -3,25 +3,9 @@ var fs = require("fs");
 var userRegisters= new Array();
 
 
-function init(response, postData){
+function init(response){
 
     console.log("Request handler 'init' has been called");
-    console.log(postData);
-    if(postData){
-        //TODO: THERE ARE REGISTER DUPLICATED
-        console.log("saving data");
-        var objectUser = {
-            "username": querystring.parse(postData)['email'],
-            "password": querystring.parse(postData)['password'],
-            "name": querystring.parse(postData)['name']
-        }
-        console.log("El usuario registrado es:", objectUser)
-
-        userRegisters.push(objectUser);
-        //clean post data avoid duplicate records
-        postData="";
-    }
-    console.log(userRegisters)
    
     fs.readFile("./vistas/home.html", function(err, data){
         if(err){
@@ -31,6 +15,34 @@ function init(response, postData){
         response.write(data);
         response.end();
     })
+}
+
+function validatedRegister(response, postData){
+
+    console.log("Request handler 'validatedRegister' has been called");
+    var myJSON = JSON.parse(postData);
+    if(postData){
+        var objectUser = {
+            "username": myJSON.username,
+            "password": myJSON.password,
+            "name": myJSON.name,
+        }
+        console.log("El usuario registrado es:", objectUser)
+        userRegisters.push(objectUser);
+        //clean post data avoid duplicate records
+        postData="";
+        response.writeHead(200, {"Content-Type": "text/html"});
+        response.end();
+    
+    }
+   
+    
+
+    
+        
+     
+    
+    
 }
 
 function login(response, postData){
@@ -55,6 +67,7 @@ function login(response, postData){
             response.end();
     
         }
+        
     }
     if(item === undefined){
         //USER DOESN'T EXISTS
@@ -104,15 +117,11 @@ function postData(response, postData){
 }
 
 function serveImg(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
-
     fs.readFile("./assets/avatars/guerrera.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -215,15 +224,14 @@ function serveImg(response, postData ,idpath){
    
 }
 function serveImg2(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
 
+   
     fs.readFile("./assets/avatars/guerrero.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+       
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -233,15 +241,14 @@ function serveImg2(response, postData ,idpath){
    
 }
 function serveImg3(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
+   
 
     fs.readFile("./assets/avatars/arquera.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+       
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -251,15 +258,14 @@ function serveImg3(response, postData ,idpath){
    
 }
 function serveImg4(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
+ 
 
     fs.readFile("./assets/avatars/arquero.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+       
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -269,15 +275,14 @@ function serveImg4(response, postData ,idpath){
    
 }
 function serveImg5(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
+   
 
     fs.readFile("./assets/avatars/maga.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+      
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -287,15 +292,14 @@ function serveImg5(response, postData ,idpath){
    
 }
 function serveImg6(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
+  
 
     fs.readFile("./assets/avatars/mago.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+       
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -305,15 +309,14 @@ function serveImg6(response, postData ,idpath){
    
 }
 function serveImg7(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
+   
 
     fs.readFile("./assets/avatars/monstrua.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+      
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -323,15 +326,14 @@ function serveImg7(response, postData ,idpath){
    
 }
 function serveImg8(response, postData ,idpath){
-    console.log("Entro")
-    console.log("El id ha llegado como: ", idpath)
+    
 
     fs.readFile("./assets/avatars/monstruo.png", function(err, data){
         if(err){
             console.log(err)
             throw err;
         }
-        console.log(data)
+     
         response.writeHead(200, {"Content-Type": "image/jpeg"});
         response.write(data);
         response.end();
@@ -345,7 +347,9 @@ exports.init = init;
 exports.login = login;
 exports.postData= postData;
 exports.register = register;
+exports.validatedRegister = validatedRegister;
 exports.gameApp = gameApp;
+//TODO: IMPROVE SERVEIMG
 exports.serveImg = serveImg;
 exports.serveImg2 = serveImg2;
 exports.serveImg3 = serveImg3;

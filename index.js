@@ -8,6 +8,8 @@ handle["/home"] =requestHandlers.init;
 handle["/register"]=requestHandlers.register;
 handle["/login"]=requestHandlers.login;
 handle["/game-app"]=requestHandlers.gameApp;
+handle["/validated-register"]=requestHandlers.validatedRegister;
+//TODO: improve this routes
 handle["/assets/avatars"]= requestHandlers.serveImg;
 handle["/assets/avatars2"]= requestHandlers.serveImg2;
 handle["/assets/avatars3"]= requestHandlers.serveImg3;

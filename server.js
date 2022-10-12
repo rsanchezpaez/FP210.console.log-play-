@@ -1,12 +1,7 @@
 
 //SERVIDOR HTTP BASICO
-
-
-
-//SERVIDOR HTTP BASICO
-
 //inicio del servidor
-//requerimos el modulo http incluido en Nodejs
+
 var http = require("http");
 var url = require("url");
 
@@ -15,7 +10,7 @@ function init(route, handle){
         var pathname = url.parse(request.url).pathname;
         var idpath = url.parse(request.url).query;
         var postData = "";
-        console.log(idpath)
+
         request.setEncoding("utf-8");
         request.addListener("data", function(textPost){
             postData += textPost;
