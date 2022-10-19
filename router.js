@@ -1,6 +1,5 @@
 function route(handle, pathname, response, postData, idpath){
     console.log("starting to route a request to: " + pathname);
-    console.log(idpath)
     if(typeof handle[pathname] === 'function'){
         handle[pathname](response, postData, idpath);
     }else{

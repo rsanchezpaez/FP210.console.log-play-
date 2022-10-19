@@ -116,28 +116,28 @@
                             <img class="avatar" id="item-1" src="http://localhost:8888/assets/avatars?1">
                         </div>
                         <div class="avatar-item">
-                            <img class="avatar" id="item-2" src="http://localhost:8888/assets/avatars2?2">
+                            <img class="avatar" id="item-2" src="http://localhost:8888/assets/avatars?2">
                         </div>
                         <div class="avatar-item">
-                            <img class="avatar" id="item-3" src="http://localhost:8888/assets/avatars3?3">
+                            <img class="avatar" id="item-3" src="http://localhost:8888/assets/avatars?3">
                         </div>
                         <div class="avatar-item">
-                            <img class="avatar" id="item-4" src="http://localhost:8888/assets/avatars4?4">
+                            <img class="avatar" id="item-4" src="http://localhost:8888/assets/avatars?4">
                         </div>
                     </div>
                     <div class="avatar-row">
 
                         <div class="avatar-item">
-                            <img class="avatar" id="item-5" src="http://localhost:8888/assets/avatars5?5">
+                            <img class="avatar" id="item-5" src="http://localhost:8888/assets/avatars?5">
                         </div>
                         <div class="avatar-item">
-                            <img class="avatar" id="item-6" src="http://localhost:8888/assets/avatars6?6">
+                            <img class="avatar" id="item-6" src="http://localhost:8888/assets/avatars?6">
                         </div>
                         <div class="avatar-item">
-                            <img class="avatar" id="item-7" src="http://localhost:8888/assets/avatars7?7">
+                            <img class="avatar" id="item-7" src="http://localhost:8888/assets/avatars?7">
                         </div>
                         <div class="avatar-item">
-                            <img class="avatar" id="item-8" src="http://localhost:8888/assets/avatars8?8">
+                            <img class="avatar" id="item-8" src="http://localhost:8888/assets/avatars?8">
                         </div>
                     </div>
                 </div>
@@ -180,20 +180,15 @@
 
 
     <script>
-        //TODO:
-        //GET AVATAR LINK: GIVE 4 - 6 OPTIONS
-        //THE IMAGES HAVE TO BE HIDDEN UNTIL THE USER PRESS TO CHOOSE
-        //CHOOSE AVATAR: GET ELEMENT BY ID... AND SEND IN THE FORM
-        /*
-        TEST THE IMG SERVE
-          fetch('/assets/avatars', {
-              method: 'GET',
-              headers: {'content-type': 'text/plain'},
-              }).then(response => console.log(response))
-              .then(data => console.log(data))
 
-
-        */
+        fetch('/assets/avatars2').then(response => {
+                console.log(response)
+                if (response.ok) {
+                  
+                } else {
+                    console.log("something is wrong. try it again")
+                }
+            })  
 
 
         var avatarPicker = document.getElementById("avatar-picker");
@@ -250,7 +245,6 @@
                     avatarChoose.src = avatar8.src;
                 })
 
-
             }
         })
 
@@ -262,8 +256,8 @@
                 document.getElementById('wrapper-selector').style.display = 'none';
             })
         }
-        console.log(pressed);
 
+        //SUBMIT REGISTER
 
         var submitButton = document.getElementById("submit-button");
 
