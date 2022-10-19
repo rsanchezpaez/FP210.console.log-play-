@@ -7,7 +7,7 @@ function init(response){
 
     console.log("Request handler 'init' has been called");
    
-    fs.readFile("views/home.html", function(err, data){
+    fs.readFile("public/views/home.html", function(err, data){
         if(err){
             throw err;
         }
@@ -69,7 +69,7 @@ function login(response, postData){
 
 function register(response){
     console.log("Request handler register has been called")
-    fs.readFile("views/register.html", function(err, data){
+    fs.readFile("public/views/register.html", function(err, data){
         if(err){
             throw err;
         }
@@ -80,7 +80,7 @@ function register(response){
     
 }
 function gameApp(response){
-    fs.readFile("views/game-app.html", function(err, data){
+    fs.readFile("public/views/game-app.html", function(err, data){
         if(err){
             throw err;
         }
