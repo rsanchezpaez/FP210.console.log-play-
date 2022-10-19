@@ -7,7 +7,7 @@ function init(response){
 
     console.log("Request handler 'init' has been called");
    
-    fs.readFile("./vistas/home.html", function(err, data){
+    fs.readFile("views/home.html", function(err, data){
         if(err){
             throw err;
         }
@@ -69,7 +69,7 @@ function login(response, postData){
 
 function register(response){
     console.log("Request handler register has been called")
-    fs.readFile("./vistas/register.html", function(err, data){
+    fs.readFile("views/register.html", function(err, data){
         if(err){
             throw err;
         }
@@ -80,7 +80,7 @@ function register(response){
     
 }
 function gameApp(response){
-    fs.readFile("./vistas/game-app.html", function(err, data){
+    fs.readFile("views/game-app.html", function(err, data){
         if(err){
             throw err;
         }
@@ -93,27 +93,27 @@ function gameApp(response){
 
 function serveImg(response, postData ,idpath){
     
-    let img ="./assets/avatars/guerrera.png"
+    let img ="src/assets/avatars/guerrera.png"
     if(idpath === "2"){
-        img="./assets/avatars/guerrero.png"
+        img="src/assets/avatars/guerrero.png"
     }
     if(idpath === "3"){
-        img="./assets/avatars/arquera.png"
+        img="src/assets/avatars/arquera.png"
     }
     if(idpath === "4"){
-        img="./assets/avatars/arquero.png"
+        img="src/assets/avatars/arquero.png"
     }
     if(idpath === "5"){
-        img="./assets/avatars/maga.png"
+        img="src/assets/avatars/maga.png"
     }
     if(idpath === "6"){
-        img="./assets/avatars/mago.png"
+        img="src/assets/avatars/mago.png"
     }
     if(idpath === "7"){
-        img="./assets/avatars/monstrua.png"
+        img="src/assets/avatars/monstrua.png"
     }
     if(idpath === "8"){
-        img="./assets/avatars/monstruo.png"
+        img="src/assets/avatars/monstruo.png"
     }
     fs.readFile(img, function(err, data){
         if(err){
