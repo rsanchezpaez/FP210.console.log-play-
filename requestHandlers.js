@@ -33,16 +33,7 @@ function validatedRegister(response, postData){
         postData="";
         response.writeHead(200, {"Content-Type": "text/html"});
         response.end();
-    
-    }
-   
-    
-
-    
-        
-     
-    
-    
+    } 
 }
 
 function login(response, postData){
@@ -65,20 +56,15 @@ function login(response, postData){
             console.log("no puede logearse password incorrecta")
             response.writeHead(404, {"Content-Type": "text/html"});
             response.end();
-    
-        }
-        
+        }    
     }
+
     if(item === undefined){
         //USER DOESN'T EXISTS
         console.log("no puede logearse usuario no registrado")
         response.writeHead(404, {"Content-Type": "text/html"});
         response.end();
     }
-    
-    //TODO: PASSWORD AND USER CORRECT? --> REDIRECT TO GAMING PAGE || SAVE VARIABLE USERLOGGED
-    //TODO: PASSWORD AND USER WRONG?? --> SHOW MESSAGE
-    
 }
 
 function register(response){
@@ -104,17 +90,6 @@ function gameApp(response){
     })
 }
 
-function postData(response, postData){
-    
-    console.log("Request handler postData has been called");
-    console.log("has posteado:" ,postData)
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write("You write: " + 
-        querystring.parse(postData)["email"] + querystring.parse(postData)["password"]
-    );
-    response.end();
-
-}
 
 function serveImg(response, postData ,idpath){
     fs.readFile("./assets/avatars/guerrera.png", function(err, data){
@@ -126,6 +101,9 @@ function serveImg(response, postData ,idpath){
         response.write(data);
         response.end();
     })
+
+    
+
      //SE BLOQUEA 
     /*
     if(idpath === 1){
@@ -338,14 +316,25 @@ function serveImg8(response, postData ,idpath){
         response.write(data);
         response.end();
     })
-    
-
-   
 }
+
+/*NOT USED
+
+function postData(response, postData){
+    
+    console.log("Request handler postData has been called");
+    console.log("has posteado:" ,postData)
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("You write: " + 
+        querystring.parse(postData)["email"] + querystring.parse(postData)["password"]
+    );
+    response.end();
+
+}
+*/
 
 exports.init = init;
 exports.login = login;
-exports.postData= postData;
 exports.register = register;
 exports.validatedRegister = validatedRegister;
 exports.gameApp = gameApp;

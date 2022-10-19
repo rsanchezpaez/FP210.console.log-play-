@@ -14,26 +14,61 @@
             box-shadow: 1px 1px 8px#ff910a;
         }
 
-        .avatar-picker {
-            display: none;
-            width: 80%;
-            margin-left: 30px;
-            flex-wrap: wrap;
+       
+
+       
+
+        .wrapper-main {
+            width: 100%;
+            height: 1200px;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 0px 30px 0px;
+            background-color: rgb(174, 253, 140);
         }
 
+        .wrapper-picker {
+            width: 30%;
+            border: solid rgb(58, 140, 255);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgb(58, 140, 255);
+            box-shadow: rgb(51, 109, 190) 10px 5px 10px;
+        }
+        #wrapper-selector{
+            display: none;
+            height: 250px;           
+            justify-content: center;
+        }
+        #avatar-selector {
+            display: flex;
+            width: 80%;
+            
+            align-items: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px 15px 0px 15px;
+            background-color: rgb(35, 20, 113);
+            border-radius: 10px;
+            
+        }
+        .avatar-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+        }
         .avatar-wrapper {
             display: flex;
             width: 100%;
             justify-content: center;
             align-items: center;
-            padding-bottom: 30px;
+            padding: 20px 0px 30px 0px;
         }
 
-        .avatar-content {
+        #avatar-picker {
             display: flex;
             width: 90px;
             height: 90px;
@@ -44,64 +79,76 @@
 
         .avatar-item {
             display: flex;
-            width: 80px;
-            height: 80px;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
             border-radius: 100%;
-            border: solid rgb(0, 0, 0);
+            border: solid rgb(222, 93, 8);
             background-color: #ff910a;
-
-
         }
 
         .avatar {
-            width: 100%;
-            height: auto;
+            width: 50px;
+            height: 50px;
             border-radius: 100%;
+        }
+        #avatarChoose{
+            width: 90px;
+            height: 90px;
+            border-radius: 100%;
+        }
+
+        .form-wrapper {
+            display: flex;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrapper-main"
-        style="width:100%; height: 800px; display: flex; justify-content:center; align-items: center; background-color: rgb(174, 253, 140);">
-        <div class=""
-            style="width:30%; border: solid rgb(58, 140, 255); padding: 20px;border-radius: 10px;background-color: rgb(58, 140, 255); box-shadow: rgb(51, 109, 190) 10px 5px 10px;">
-            <div class="avatar-picker" id="avatar-selector">
-                <div class="avatar-item">
-                    <img class="avatar" id="item-1" src="http://localhost:8888/assets/avatars?1">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-2" src="http://localhost:8888/assets/avatars2?2">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-3" src="http://localhost:8888/assets/avatars3?3">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-4" src="http://localhost:8888/assets/avatars4?4">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-5" src="http://localhost:8888/assets/avatars5?5">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-6" src="http://localhost:8888/assets/avatars6?6">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-7" src="http://localhost:8888/assets/avatars7?7">
-                </div>
-                <div class="avatar-item">
-                    <img class="avatar" id="item-8" src="http://localhost:8888/assets/avatars8?8">
+    <div class="wrapper-main">
+
+        <div class =wrapper-picker>
+            <div id="wrapper-selector">
+                <div id="avatar-selector">
+                    <div class="avatar-row">
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-1" src="http://localhost:8888/assets/avatars?1">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-2" src="http://localhost:8888/assets/avatars2?2">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-3" src="http://localhost:8888/assets/avatars3?3">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-4" src="http://localhost:8888/assets/avatars4?4">
+                        </div>
+                    </div>
+                    <div class="avatar-row">
+
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-5" src="http://localhost:8888/assets/avatars5?5">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-6" src="http://localhost:8888/assets/avatars6?6">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-7" src="http://localhost:8888/assets/avatars7?7">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-8" src="http://localhost:8888/assets/avatars8?8">
+                        </div>
+                    </div>
                 </div>
             </div>
-           
-            <!--
-            <form action="/home" method="post">
-            -->
+
+            <div class="mb-3">
                 <div class="avatar-wrapper">
                     <div class="avatar-content" id="avatar-picker">
                         <img class="avatar" id="avatarChoose" src="/assets/avatars">
                     </div>
                 </div>
-
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-2 col-form-label text-light">Name</label>
                     <div class="col-sm-9 px-4">
@@ -122,12 +169,15 @@
                     </div>
                 </div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn btn-outline-warning" id="submit-button" type="submit">Sign in</button>
+                    <button class="btn btn-primary btn btn-outline-warning" id="submit-button" type="submit">Sign
+                        in</button>
                 </div>
-            <!-- </form>-->
-           
+            </div>
         </div>
+
+
     </div>
+
 
     <script>
         //TODO:
@@ -147,21 +197,19 @@
 
 
         var avatarPicker = document.getElementById("avatar-picker");
-        var pressed = false;
         var avatarChoose = document.getElementById("avatarChoose");
+        var pressed = false;
+        
 
         avatarPicker.addEventListener("click", function () {
             console.log("pressed")
-            document.getElementById('avatar-selector').style.display = 'flex';
+            document.getElementById('wrapper-selector').style.display = 'flex';
             pressed = true;
 
 
             //CHOSE AVAVATAR
 
             if (pressed == true) {
-
-                
-
                 var avatar1 = document.getElementById("item-1");
                 avatar1.addEventListener("click", function () {
                     avatarChoose.src = avatar1.src;
@@ -210,22 +258,21 @@
         for (var i = 0; i < input.length; i++) {
             console.log(input[i]);
             input[i].addEventListener("click", function () {
-                document.getElementById('avatar-selector').style.display = 'none';
+                console.log('pressedinput')
+                document.getElementById('wrapper-selector').style.display = 'none';
             })
         }
         console.log(pressed);
 
 
         var submitButton = document.getElementById("submit-button");
-        
-        submitButton.addEventListener("click", function(){
+
+        submitButton.addEventListener("click", function () {
             var username = document.getElementById('email').value;
-            console.log(username)
             var password = document.getElementById('password').value;
-            var name =  document.getElementById('name').value;
-            console.log("entra")
-            
-                fetch('/validated-register', {
+            var name = document.getElementById('name').value;
+
+            fetch('/validated-register', {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify({
@@ -237,6 +284,7 @@
                 console.log(response)
                 if (response.ok) {
                     var newObject = {
+                        'name': name,
                         'username': username,
                         'avatar': avatarChoose.src
                     }
@@ -249,7 +297,7 @@
             })
         })
 
-        
+
 
 
     </script>

@@ -127,16 +127,19 @@
                     password: password
                 })
             }).then(response => {
-                console.log(response)
                 if (response.ok) {
                     isLogged = true;
+                    var user =JSON.parse(localStorage.getItem("User"));
+
                     var newObject = {
-                        'username': username,
-                        'isLogged': isLogged
+                        'name': user.name,
+                        'username': user.username,
+                        'isLogged': isLogged,
+                        'avatar': user.avatar
                     }
+                   
                     localStorage.setItem('User', JSON.stringify(newObject))
                     fetch('/game-app').then(response => {
-                        console.log(response)
                         window.location.assign(response.url)
                     })
                 } else {
