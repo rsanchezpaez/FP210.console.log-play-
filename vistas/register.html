@@ -1,150 +1,306 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Console.log play Games</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <style>
-            .form-control:focus{
-                border:2px solid #ff910a;
-                box-shadow: 1px 1px 8px#ff910a;
-            }
-            .avatar-picker{
-                display: none;
-                width: 80%;
-                margin-left: 30px;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: space-around;
-                align-items: center;
-                padding: 30px 0px 30px 0px;
-            }
-            .avatar-wrapper{
-                display: flex;
-                width: 100%;
-                justify-content:center;
-                align-items: center;
-                padding-bottom: 30px;
-            }
-            .avatar-content{
-                display: flex;
-                width: 90px;
-                height: 90px;
-                border-radius: 100%;
-                background-color: #ff910a;
-                
-            }
-            .avatar-item{
-                display: flex;
-                width: 50px;
-                height: 50px;
-                border-radius: 100%;
-                border:solid rgb(0, 0, 0);
-                background-color: #ff910a;
-                
-                
-            }
-            .avatar{
-                width: 100%;
-                height: auto;
-                border-radius: 100%;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="wrapper-main" style="width:100%; height: 800px; display: flex; justify-content:center; align-items: center; background-color: rgb(174, 253, 140);">
-            <div class="" style="width:30%; border: solid rgb(58, 140, 255); padding: 20px;border-radius: 10px;background-color: rgb(58, 140, 255); box-shadow: rgb(51, 109, 190) 10px 5px 10px;">
-                <div class="avatar-picker" id="avatar-selector">
-                    <div class="avatar-item" id="item-1">
-                      <img class="avatar" src="http://localhost:8888/assets/avatars?1">
+
+<head>
+    <title>Console.log play Games</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <style>
+        .form-control:focus {
+            border: 2px solid #ff910a;
+            box-shadow: 1px 1px 8px#ff910a;
+        }
+
+       
+
+       
+
+        .wrapper-main {
+            width: 100%;
+            height: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(174, 253, 140);
+        }
+
+        .wrapper-picker {
+            width: 30%;
+            border: solid rgb(58, 140, 255);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgb(58, 140, 255);
+            box-shadow: rgb(51, 109, 190) 10px 5px 10px;
+        }
+        #wrapper-selector{
+            display: none;
+            height: 250px;           
+            justify-content: center;
+        }
+        #avatar-selector {
+            display: flex;
+            width: 80%;
+            
+            align-items: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px 15px 0px 15px;
+            background-color: rgb(35, 20, 113);
+            border-radius: 10px;
+            
+        }
+        .avatar-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+        }
+        .avatar-wrapper {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0px 30px 0px;
+        }
+
+        #avatar-picker {
+            display: flex;
+            width: 90px;
+            height: 90px;
+            border-radius: 100%;
+            background-color: #ff910a;
+
+        }
+
+        .avatar-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            border: solid rgb(222, 93, 8);
+            background-color: #ff910a;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+        #avatarChoose{
+            width: 90px;
+            height: 90px;
+            border-radius: 100%;
+        }
+
+        .form-wrapper {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper-main">
+
+        <div class =wrapper-picker>
+            <div id="wrapper-selector">
+                <div id="avatar-selector">
+                    <div class="avatar-row">
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-1" src="http://localhost:8888/assets/avatars?1">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-2" src="http://localhost:8888/assets/avatars2?2">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-3" src="http://localhost:8888/assets/avatars3?3">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-4" src="http://localhost:8888/assets/avatars4?4">
+                        </div>
                     </div>
-                    <div class="avatar-item" id="item-2">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars2?2">
-                    </div>
-                    <div class="avatar-item" id="item-3">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars3?3">
-                    </div>
-                    <div class="avatar-item" id="item-4">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars4?4">
-                    </div>
-                    <div class="avatar-item" id="item-4">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars5?5">
-                    </div>
-                    <div class="avatar-item" id="item-4">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars6?6">
-                    </div>
-                    <div class="avatar-item" id="item-4">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars7?7">
-                    </div>
-                    <div class="avatar-item" id="item-4">
-                        <img class="avatar" src="http://localhost:8888/assets/avatars8?8">
+                    <div class="avatar-row">
+
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-5" src="http://localhost:8888/assets/avatars5?5">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-6" src="http://localhost:8888/assets/avatars6?6">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-7" src="http://localhost:8888/assets/avatars7?7">
+                        </div>
+                        <div class="avatar-item">
+                            <img class="avatar" id="item-8" src="http://localhost:8888/assets/avatars8?8">
+                        </div>
                     </div>
                 </div>
-                <form action="/home" method="post">
-                    <div class="avatar-wrapper">
-                        <div class="avatar-content" id="avatar-picker">
-                            <img class="avatar" src="/assets/avatars">
-                        </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="avatar-wrapper">
+                    <div class="avatar-content" id="avatar-picker">
+                        <img class="avatar" id="avatarChoose" src="/assets/avatars">
                     </div>
-                    
-                    <div class="mb-3 row">
-                        <label for="email" class="col-sm-2 col-form-label text-light">Name</label>
-                        <div class="col-sm-9 px-4">
-                            <input style="margin-left: 20px;" type="text" class="form-control" id="name" name="name">
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-2 col-form-label text-light">Name</label>
+                    <div class="col-sm-9 px-4">
+                        <input style="margin-left: 20px;" type="text" class="form-control" id="name" name="name">
                     </div>
-                    <div class="mb-3 row">
-                        <label for="email" class="col-sm-2 col-form-label text-light">Email</label>
-                        <div class="col-sm-9 px-4">
-                            <input style="margin-left: 20px;" type="text" class="form-control" id="email" name="email">
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-2 col-form-label text-light">Email</label>
+                    <div class="col-sm-9 px-4">
+                        <input style="margin-left: 20px;" type="text" class="form-control" id="email" name="email">
                     </div>
-                    <div class="mb-3 row">
-                        <label for="password" class="col-sm-2 col-form-label text-light">Password</label>
-                        <div class="col-sm-9 px-4">
-                            <input style="margin-left: 20px;" type="password" class="form-control" id="password" name="password">
-                        </div>
-                    </div> 
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn btn-outline-warning" type="submit">Sign in</button>
+                </div>
+                <div class="mb-3 row">
+                    <label for="password" class="col-sm-2 col-form-label text-light">Password</label>
+                    <div class="col-sm-9 px-4">
+                        <input style="margin-left: 20px;" type="password" class="form-control" id="password"
+                            name="password">
                     </div>
-                </form>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary btn btn-outline-warning" id="submit-button" type="submit">Sign
+                        in</button>
+                </div>
             </div>
         </div>
+
+
+    </div>
+
+
+    <script>
+        //TODO:
+        //GET AVATAR LINK: GIVE 4 - 6 OPTIONS
+        //THE IMAGES HAVE TO BE HIDDEN UNTIL THE USER PRESS TO CHOOSE
+        //CHOOSE AVATAR: GET ELEMENT BY ID... AND SEND IN THE FORM
+        /*
+        TEST THE IMG SERVE
+          fetch('/assets/avatars', {
+              method: 'GET',
+              headers: {'content-type': 'text/plain'},
+              }).then(response => console.log(response))
+              .then(data => console.log(data))
+
+
+        */
+
+
+        var avatarPicker = document.getElementById("avatar-picker");
+        var avatarChoose = document.getElementById("avatarChoose");
+        var pressed = false;
         
-        <script>
-            //TODO:
-            //GET AVATAR LINK: GIVE 4 - 6 OPTIONS
-            //THE IMAGES HAVE TO BE HIDDEN UNTIL THE USER PRESS TO CHOOSE
-            //CHOOSE AVATAR: GET ELEMENT BY ID... AND SEND IN THE FORM
-          /*
-          TEST THE IMG SERVE
-            fetch('/assets/avatars', {
-                method: 'GET',
-                headers: {'content-type': 'text/plain'},
-                }).then(response => console.log(response))
-                .then(data => console.log(data))
+
+        avatarPicker.addEventListener("click", function () {
+            console.log("pressed")
+            document.getElementById('wrapper-selector').style.display = 'flex';
+            pressed = true;
 
 
-          */
-           
+            //CHOSE AVAVATAR
 
-            var avatarPicker = document.getElementById("avatar-picker");
+            if (pressed == true) {
+                var avatar1 = document.getElementById("item-1");
+                avatar1.addEventListener("click", function () {
+                    avatarChoose.src = avatar1.src;
+                })
 
-            avatarPicker.addEventListener("click", function(){
-                console.log("pressed")
-                document.getElementById('avatar-selector').style.display = 'flex';
-            })
+                var avatar2 = document.getElementById("item-2");
+                avatar2.addEventListener("click", function () {
+                    avatarChoose.src = avatar2.src;
+                })
 
-            var input = document.getElementsByClassName("form-control");
-            for(var i = 0; i <input.length ; i++){
-                console.log(input[i]);
-                input[i].addEventListener("click", function(){
-                document.getElementById('avatar-selector').style.display = 'none';
-            })
+                var avatar3 = document.getElementById("item-3");
+                avatar3.addEventListener("click", function () {
+                    avatarChoose.src = avatar3.src;
+                })
+
+                var avatar4 = document.getElementById("item-4");
+                avatar4.addEventListener("click", function () {
+                    avatarChoose.src = avatar4.src;
+                })
+
+                var avatar5 = document.getElementById("item-5");
+                avatar5.addEventListener("click", function () {
+                    avatarChoose.src = avatar5.src;
+                })
+
+                var avatar6 = document.getElementById("item-6");
+                avatar6.addEventListener("click", function () {
+                    avatarChoose.src = avatar6.src;
+                })
+
+                var avatar7 = document.getElementById("item-7");
+                avatar7.addEventListener("click", function () {
+                    avatarChoose.src = avatar7.src;
+                })
+
+                var avatar8 = document.getElementById("item-8");
+                avatar8.addEventListener("click", function () {
+                    avatarChoose.src = avatar8.src;
+                })
+
+
             }
-            
-           
-        </script>
-    </body>
+        })
+
+        var input = document.getElementsByClassName("form-control");
+        for (var i = 0; i < input.length; i++) {
+            console.log(input[i]);
+            input[i].addEventListener("click", function () {
+                console.log('pressedinput')
+                document.getElementById('wrapper-selector').style.display = 'none';
+            })
+        }
+        console.log(pressed);
+
+
+        var submitButton = document.getElementById("submit-button");
+
+        submitButton.addEventListener("click", function () {
+            var username = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var name = document.getElementById('name').value;
+
+            fetch('/validated-register', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    username: username,
+                    password: password
+                })
+            }).then(response => {
+                console.log(response)
+                if (response.ok) {
+                    var newObject = {
+                        'name': name,
+                        'username': username,
+                        'avatar': avatarChoose.src
+                    }
+                    localStorage.setItem('User', JSON.stringify(newObject))
+                    console.log(newObject)
+                    window.location.assign("/home")
+                } else {
+                    console.log("something is wrong. try it again")
+                }
+            })
+        })
+
+
+
+
+    </script>
+</body>
+
 </html>
