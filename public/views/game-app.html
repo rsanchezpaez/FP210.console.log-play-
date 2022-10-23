@@ -7,9 +7,10 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> 
+    
     <style>
-
+ 
         #wrapper-main {
             width: 100%;
             height: 1500px;
@@ -115,11 +116,56 @@
             box-shadow: rgb(51, 109, 190) 10px 5px 10px;
         }
 
-
     </style>
+
+        <!--
+        JQuery
+        library and scripts
+        
+    -->  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+         $(document).ready(function(){
+            $("#containerRooms").hide().fadeIn(2000);
+            $("#wrapper-main").hide().fadeIn(1000);
+      
+           /* var room1 =  document.getElementById("room1");
+            document.getElementById("room1").addEventListener("click", room1Selected(),false)*/
+            //document.getElementById("room1").addEventListener("click", room1Selected,false);
+            document.getElementById("room1").addEventListener("click", function() {roomSelected(1);});
+            document.getElementById("room2").addEventListener("click", function() {roomSelected(2);});
+            document.getElementById("room3").addEventListener("click", function() {roomSelected(3);});
+
+        });
+
+        function roomSelected(roomNumber){
+            $("#room1").css("background-color","rgb(58, 140, 255)")
+            $("#room2").css("background-color","rgb(58, 140, 255)")
+            $("#room3").css("background-color","rgb(58, 140, 255)")
+
+            switch(roomNumber) {
+                
+                case 1:
+                    $("#room1").css("background-color","red")
+                    break;
+                case 2:
+                    $("#room2").css("background-color","red")
+                    break;
+                case 3:
+                    $("#room3").css("background-color","red")
+                    break;
+                default:
+                    // code block
+                }
+           
+        }
+
+    </script>
+
 </head>
 
 <body>
+
     <div id="wrapper-main">
         <div class="wrapper-header">
             <div class="wrapper-log-out">
@@ -141,10 +187,10 @@
                 </div>
             </div>
             <div  class="wrapper-rooms">
-                <div class="container-rooms">
-                    <div class="room"></div>
-                    <div class="room"></div>
-                    <div class="room"></div>
+                <div class="container-rooms" id="containerRooms">
+                    <div class="room" id="room1"></div>
+                    <div class="room" id="room2"></div>
+                    <div class="room" id="room3"></div>
                 </div>
             </div>   
         </div>
