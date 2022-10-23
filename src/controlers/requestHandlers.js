@@ -126,6 +126,24 @@ function serveImg(response, postData ,idpath){
         response.end();
     })
 }  
+
+function serveAnotherImg(response, postData,idpath, img){
+    //Todo: Switch case con las imagnes a mostrar
+    img="src/assets/images/sword.png"
+    fs.readFile(img, function(err, data){
+        if(err){
+            console.log(err)
+            throw err;
+        }
+        
+        response.writeHead(200, {"Content-Type": "image/jpeg"});
+        response.write(data);
+        response.end();
+    })
+
+}
+
+
     
 
 exports.init = init;
@@ -134,6 +152,7 @@ exports.register = register;
 exports.validatedRegister = validatedRegister;
 exports.gameApp = gameApp;
 exports.serveImg = serveImg;
+exports.serveAnotherImg=serveAnotherImg;
 
 
 

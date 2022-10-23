@@ -114,6 +114,17 @@
             background-color:rgb(58, 140, 255);
             border-radius: 10px;
             box-shadow: rgb(51, 109, 190) 10px 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .imageSelected{
+            visibility:visible;
+        }
+
+        .imageNotSelected{
+            visibility:hidden;
         }
 
     </style>
@@ -128,10 +139,7 @@
          $(document).ready(function(){
             $("#containerRooms").hide().fadeIn(2000);
             $("#wrapper-main").hide().fadeIn(1000);
-      
-           /* var room1 =  document.getElementById("room1");
-            document.getElementById("room1").addEventListener("click", room1Selected(),false)*/
-            //document.getElementById("room1").addEventListener("click", room1Selected,false);
+
             document.getElementById("room1").addEventListener("click", function() {roomSelected(1);});
             document.getElementById("room2").addEventListener("click", function() {roomSelected(2);});
             document.getElementById("room3").addEventListener("click", function() {roomSelected(3);});
@@ -139,20 +147,41 @@
         });
 
         function roomSelected(roomNumber){
+
+            var img1 = document.getElementById('select1');
+            var img2 = document.getElementById('select2');
+            var img3 = document.getElementById('select3');
+
+            
             $("#room1").css("background-color","rgb(58, 140, 255)")
             $("#room2").css("background-color","rgb(58, 140, 255)")
             $("#room3").css("background-color","rgb(58, 140, 255)")
+            
+
 
             switch(roomNumber) {
                 
-                case 1:
+                case 1:/*
+                    //$("#room1").replaceWith("<div class='room' id='room1'><img id='select1' src='assets/images''</div></div>")
+                    $("#room1").replaceWith("<div class='room' id='room1'><img width='100' id='select1' src='assets/images''</div>")*/
                     $("#room1").css("background-color","red")
+                    img2.style.visibility = "hidden";
+                    img3.style.visibility = "hidden";
+                    img1.style.visibility = "visible";
                     break;
                 case 2:
+                    //$("#room2").replaceWith("<div class='room' id='room2'><img width='100' id='select2' src='assets/images''</div>")
                     $("#room2").css("background-color","red")
+                    img2.style.visibility = "visible";
+                    img3.style.visibility = "hidden";
+                    img1.style.visibility = "hidden";
                     break;
                 case 3:
+                    //$("#room3").replaceWith("<div class='room' id='room3'><img width='100' id='select3' src='assets/images''</div>")
                     $("#room3").css("background-color","red")
+                    img2.style.visibility = "hidden";
+                    img3.style.visibility = "visible";
+                    img1.style.visibility = "hidden";
                     break;
                 default:
                     // code block
@@ -188,9 +217,9 @@
             </div>
             <div  class="wrapper-rooms">
                 <div class="container-rooms" id="containerRooms">
-                    <div class="room" id="room1"></div>
-                    <div class="room" id="room2"></div>
-                    <div class="room" id="room3"></div>
+                    <div class="room" id="room1"><img width="100" id="select1" class="imageNotSelected" src="assets/images"></div>
+                    <div class="room" id="room2"><img width="100" id="select2" class="imageNotSelected" src="assets/images"></div>
+                    <div class="room" id="room3"><img width="100" id="select3" class="imageNotSelected" src="assets/images"></div>
                 </div>
             </div>   
         </div>
