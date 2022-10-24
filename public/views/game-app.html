@@ -122,6 +122,53 @@
             box-shadow: rgb(51, 109, 190) 10px 5px 10px;
         }
     </style>
+
+    <!--
+        JQuery
+        library and scripts
+    -->  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+           $("#containerRooms").hide().fadeIn(3000);
+           $("#wrapper-main").hide().fadeIn(1000);
+       });
+
+       function roomSelected(roomNumber){
+                  
+        $("#room1").css("background-color","rgb(58, 140, 255)")
+        $("#room2").css("background-color","rgb(58, 140, 255)")
+        $("#room3").css("background-color","rgb(58, 140, 255)")
+
+        switch(roomNumber) {
+                
+                case "room1":
+
+                    $("#room1").css("background-color","red")
+
+                    break;
+                case "room2":
+
+                    $("#room2").css("background-color","red")
+
+                    break;
+                case "room3":
+
+                    $("#room3").css("background-color","red")
+
+                    break;
+                default:
+                    // code block
+                }
+    
+          
+       }
+
+   </script>
+
+
+
 </head>
 
 <body>
@@ -146,7 +193,7 @@
                 </div>
             </div>
             <div class="wrapper-rooms">
-                <div class="container-rooms">
+                <div class="container-rooms" id="containerRooms">
                     <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                     <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                     <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
@@ -211,7 +258,8 @@
                         ev.preventDefault();
                         console.log(data);
                         ev.target.appendChild(document.getElementById(data));
-                        console.log(ev.target.id)
+                        console.log(data)              
+                        roomSelected(ev.target.id);
                     }
                     else { alert("La sala esta ocupada") }
                 })
