@@ -10,5 +10,5 @@ handle["/login"]=requestHandlers.login;
 handle["/game-app"]=requestHandlers.gameApp;
 handle["/validated-register"]=requestHandlers.validatedRegister;
 handle["/assets/avatars"]= requestHandlers.serveImg;
-
+handle["/ocupation"]= requestHandlers.ocupation;
 server.init(router.route, handle);
