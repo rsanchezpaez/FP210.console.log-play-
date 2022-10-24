@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
     <style>
-
         #wrapper-main {
             width: 100%;
             height: 1500px;
@@ -33,49 +33,55 @@
             background-color: #1a1a1a;
             box-shadow: rgb(35, 37, 39) 10px 5px 10px;
         }
-        .wrapper-log-out{
-            display: flex; 
-            justify-content:flex-end; 
+
+        .wrapper-log-out {
+            display: flex;
+            justify-content: flex-end;
             width: 90%;
         }
-        #log-out{
-            color:white; 
-            font-weight:500; 
+
+        #log-out {
+            color: white;
+            font-weight: 500;
             cursor: pointer;
         }
-        .wrapper-content{
-            display:flex; 
-            flex-direction:column; 
+
+        .wrapper-content {
+            display: flex;
+            flex-direction: column;
             width: 100%;
         }
-        .wrapper-info{
-            width:100%; 
-            height: 100%; 
+
+        .wrapper-info {
+            width: 100%;
+            height: 100%;
             display: flex;
-            flex-direction:column; 
-            align-items: center; 
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            background-color:#ffffe6
+            background-color: #ffffe6
         }
-        .wrapper-user{
-            display:flex; 
-            width:100%; 
-            flex-direction: column; 
+
+        .wrapper-user {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
             align-items: center;
             padding: 20px 0px 20px 0px;
         }
-        h1{
-            font-size: 20px; 
+
+        h1 {
+            font-size: 20px;
             font-weight: 550;
             line-height: 60px;
         }
-        
+
         #avatarChoose {
             width: 80px;
             height: 80px;
             border-radius: 100%;
             border: 2px solid #1a1a1a;
-            
+
         }
 
         #user-name {
@@ -83,39 +89,38 @@
             font-size: 20px;
         }
 
-        .wrapper-helper{
+        .wrapper-helper {
             display: flex;
-            width:100%; 
-            justify-content: center; 
-            flex-direction: column; 
-            align-items: center; 
-            font-family: 'Courier New', Courier, monospace; 
-            font-size: 17px; padding: 20px 0px 20px 0px;
+            width: 100%;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 17px;
+            padding: 20px 0px 20px 0px;
         }
 
-        .wrapper-rooms{
-            width: 100%; 
-            display: flex; 
-            justify-content:center
+        .wrapper-rooms {
+            width: 100%;
+            display: flex;
+            justify-content: center
         }
 
-        .container-rooms{
-            width:90%; 
-            display:flex; 
-            justify-content:space-around; 
-            align-items: center; 
+        .container-rooms {
+            width: 90%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
             padding: 30px 0px 30px 0px;
         }
 
-        .room{
-            width:20%; 
+        .room {
+            width: 20%;
             height: 300px;
-            background-color:rgb(58, 140, 255);
+            background-color: rgb(58, 140, 255);
             border-radius: 10px;
             box-shadow: rgb(51, 109, 190) 10px 5px 10px;
         }
-
-
     </style>
 </head>
 
@@ -129,9 +134,9 @@
         <div class="wrapper-content">
             <div class="wrapper-info">
                 <div class="wrapper-user">
-                    <div id="avatar-picker">
+                    <div id="avatar-picker" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <span id="user-name"></span>
-                        <img id="avatarChoose" src="">
+                        <img draggable="true" ondragstart="drag(event)" id="avatarChoose" src="">
                     </div>
                     <h1>Welcome to console.log(play) game</h1>
                 </div>
@@ -140,13 +145,13 @@
                     <spam>In each room you can play up to two players maximum.</spam>
                 </div>
             </div>
-            <div  class="wrapper-rooms">
+            <div class="wrapper-rooms">
                 <div class="container-rooms">
-                    <div class="room"></div>
-                    <div class="room"></div>
-                    <div class="room"></div>
+                    <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
     <script>
@@ -179,17 +184,45 @@
         var logOut = document.getElementById("log-out");
         logOut.addEventListener("click", function () {
             var userLogOut = {
-                    'name': user.name,
-                    'username': user.username,
-                    'isLogged': false,
-                    'avatar': user.avatar
-                }
+                'name': user.name,
+                'username': user.username,
+                'isLogged': false,
+                'avatar': user.avatar
+            }
             localStorage.setItem('User', JSON.stringify(userLogOut))
             fetch("/home").then(response => {
                 window.location.assign(response.url)
             })
         })
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
 
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            var data = ev.dataTransfer.getData("text");
+            if (ev.target.id != "user-name") {
+                fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
+                    if (response.ok) {
+                        alert("Bienvenido a la sala");
+                        ev.preventDefault();
+                        console.log(data);
+                        ev.target.appendChild(document.getElementById(data));
+                        console.log(ev.target.id)
+                    }
+                    else { alert("La sala esta ocupada") }
+                })
+            }
+            else {
+                ev.target.appendChild(document.getElementById(data));
+                console.log(ev.target.id)
+            }
+
+
+        }
     </script>
 
 </body>
