@@ -117,6 +117,21 @@
 
 
     </style>
+<script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+    
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+    
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+    </script>
 </head>
 
 <body>
@@ -129,9 +144,9 @@
         <div class="wrapper-content">
             <div class="wrapper-info">
                 <div class="wrapper-user">
-                    <div id="avatar-picker">
+                    <div id="avatar-picker" ondrop="drop(event)" ondragover="allowDrop(event)">
                         <span id="user-name"></span>
-                        <img id="avatarChoose" src="">
+                        <img  draggable="true" ondragstart="drag(event)" id="avatarChoose" src="">
                     </div>
                     <h1>Welcome to console.log(play) game</h1>
                 </div>
@@ -142,9 +157,9 @@
             </div>
             <div  class="wrapper-rooms">
                 <div class="container-rooms">
-                    <div class="room"></div>
-                    <div class="room"></div>
-                    <div class="room"></div>
+                    <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                 </div>
             </div>   
         </div>
