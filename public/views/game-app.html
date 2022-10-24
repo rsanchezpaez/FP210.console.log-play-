@@ -133,13 +133,34 @@
         $(document).ready(function(){
            $("#containerRooms").hide().fadeIn(3000);
            $("#wrapper-main").hide().fadeIn(1000);
-
-
-
        });
 
        function roomSelected(roomNumber){
+                  
+        $("#room1").css("background-color","rgb(58, 140, 255)")
+        $("#room2").css("background-color","rgb(58, 140, 255)")
+        $("#room3").css("background-color","rgb(58, 140, 255)")
 
+        switch(roomNumber) {
+                
+                case "room1":
+
+                    $("#room1").css("background-color","red")
+
+                    break;
+                case "room2":
+
+                    $("#room2").css("background-color","red")
+
+                    break;
+                case "room3":
+
+                    $("#room3").css("background-color","red")
+
+                    break;
+                default:
+                    // code block
+                }
     
           
        }
@@ -237,7 +258,8 @@
                         ev.preventDefault();
                         console.log(data);
                         ev.target.appendChild(document.getElementById(data));
-                        console.log(ev.target.id)
+                        console.log(data)              
+                        roomSelected(ev.target.id);
                     }
                     else { alert("La sala esta ocupada") }
                 })
