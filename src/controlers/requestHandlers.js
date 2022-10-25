@@ -91,17 +91,17 @@ function gameApp(response) {
 
 function ocupation(response, postData, idpath) {
 
-    var chosen_room = rooms.find(room => room.numero === querystring.parse(idpath)["room"]);
-
-    if (chosen_room.jugador1 != '' && chosen_room.jugador2 != '') {
+    var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+    console.log(chosen_room)
+    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
         response.writeHead(404, { "Content-Type": "text/html" });
     }
     else {
-        if(chosen_room.jugador1 === '') {
-            chosen_room.jugador1 = querystring.parse(idpath)["user"]
+        if(chosen_room.player1 === '') {
+            chosen_room.player1 = querystring.parse(idpath)["user"]
         }
         else{
-            chosen_room.jugador2 = querystring.parse(idpath)["user"]
+            chosen_room.player2 = querystring.parse(idpath)["user"]
         }
 
         response.writeHead(200, { "Content-Type": "text/html" });
