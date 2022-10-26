@@ -180,6 +180,7 @@
         var avatarPicker = document.getElementById("avatar-picker");
         var avatarChoose = document.getElementById("avatarChoose");
         var pressed = false;
+       
         
 
         avatarPicker.addEventListener("click", function () {
@@ -266,7 +267,7 @@
                     var newObject = {
                         'name': name,
                         'username': username,
-                        'avatar': avatarChoose.src
+                        'avatar': avatarChoose.src.replace('http://localhost:8888', '')
                     }
                     localStorage.setItem('User', JSON.stringify(newObject))
                     console.log(newObject)
