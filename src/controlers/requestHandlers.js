@@ -2,6 +2,7 @@ var querystring = require("querystring");
 var fs = require("fs");
 const Room = require('../models/Room')
 const Player = require('../models/Player');
+const Game = require("../models/Game");
 
 var userRegisters = new Array();
 var rooms = new Array();
