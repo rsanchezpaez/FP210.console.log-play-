@@ -83,6 +83,13 @@
             border: 2px solid #1a1a1a;
 
         }
+        #newId {
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            border: 2px solid #1a1a1a;
+
+        }
 
         #user-name {
             text-transform: capitalize;
@@ -330,24 +337,41 @@
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
-
+        function desconectar(room,user) {
+            fetch('/disconnect?room=' + room + '&user=' + user).then(response => {
+                console.log(response);
+                    if (response.ok) {
+                        alert("Desconectado correctamente");
+                        localStorage.removeItem(room);
+                        document.getElementById(room).innerHTML='';
+                        document.getElementById(room).style.backgroundColor='rgb(58, 140, 255)';
+                    }
+                    else { alert("Error al salir de la sala") }
+                })           
+        }
         function drop(ev) {
             var data = ev.dataTransfer.getData("text");
             if (ev.target.id != "user-name") {
                 fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
                     if (response.ok) {
                         alert("Bienvenido a la sala");
+                        localStorage.setItem(ev.target.id, true);
                         ev.preventDefault();
                         console.log(data);
-                        ev.target.appendChild(document.getElementById(data));
+                        var nodeCopy = document.getElementById(data).cloneNode(true);
+                        nodeCopy.id = "newId"
+                        ev.target.appendChild(nodeCopy);
                         console.log(data)              
                         roomSelected(ev.target.id);
+                        document.getElementById(ev.target.id).innerHTML=document.getElementById(ev.target.id).innerHTML+'<input class="btn btn-primary" type="button" value="Salir" onClick=desconectar("'+ev.target.id+'","'+user.username+'") />';
                     }
                     else { alert("La sala esta ocupada") }
                 })
             }
             else {
-                ev.target.appendChild(document.getElementById(data));
+                var nodeCopy = document.getElementById(data).cloneNode(true);
+                nodeCopy.id = "newId"
+                ev.target.appendChild(nodeCopy);
                 console.log(ev.target.id)
             }
         }
