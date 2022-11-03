@@ -360,7 +360,7 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
             fetch('/disconnect?room=' + room + '&user=' + user).then(response => {
                 console.log(response);
                     if (response.ok) {
-                        document.getElementById("alert-text").innerHTML='Desconectado correctamente';
+                        document.getElementById("alert-text").innerHTML='Correctly disconnected';
                         $("#myModal").modal("show");
                         //alert("Desconectado correctamente");
                         localStorage.removeItem(room);
@@ -368,7 +368,7 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
                         document.getElementById(room).style.backgroundColor='rgb(58, 140, 255)';
                     }
                     else {
-                        document.getElementById("alert-text").innerHTML='Error al salir de la sala';
+                        document.getElementById("alert-text").innerHTML='Error leaving the room';
                         $("#myModal").modal("show"); 
                         //alert("Error al salir de la sala") 
                     }
@@ -379,7 +379,7 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
             if (ev.target.id != "user-name") {
                 fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
                     if (response.ok) {
-                        document.getElementById("alert-text").innerHTML='Bienvenido a la sala';
+                        document.getElementById("alert-text").innerHTML='Welcome to the room';
                         $("#myModal").modal("show");
                         //alert("Bienvenido a la sala");
                         localStorage.setItem(ev.target.id, true);
@@ -393,7 +393,7 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
                         document.getElementById(ev.target.id).innerHTML=document.getElementById(ev.target.id).innerHTML+'<input class="btn btn-primary" type="button" value="Salir" onClick=desconectar("'+ev.target.id+'","'+user.username+'") />';
                     }
                     else { 
-                        document.getElementById("alert-text").innerHTML='La sala esta ocupada';
+                        document.getElementById("alert-text").innerHTML='Room is full. Try another one';
                         $("#myModal").modal("show");
                         //alert("La sala esta ocupada") 
                      }
