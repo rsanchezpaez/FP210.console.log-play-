@@ -183,6 +183,10 @@
            $("#wrapper-main").hide().fadeIn(1000);
        });
 
+        /**
+        * Change the color of a selected room from blue to red, the unselected ones will be painted again in blue.
+        * @param  {Number} roomNumber Number of the selected room.
+        */
        function roomSelected(roomNumber){
                   
         $("#room1").css("background-color","rgb(58, 140, 255)")
@@ -209,15 +213,8 @@
                 default:
                     // code block
                 }
-    
-          
        }
-
-   
-
    </script>
-
-
 
 </head>
 
@@ -270,9 +267,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
 
                     <h1>Welcome to console.log(play) game</h1>
                 </div>
@@ -358,6 +352,11 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
+        /**
+        * Manage the log out of the previews logged user. Delete the room selected by the user.
+        * @param  {Room} room room selected by the user
+        * @param  {User} user user logged in
+        */
         function desconectar(room,user) {
             fetch('/disconnect?room=' + room + '&user=' + user).then(response => {
                 console.log(response);
@@ -376,6 +375,10 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
                     }
                 })           
         }
+                /**
+        * Manage the actions triggered by dropping the avatar into a room. First checks if the room is full and alert the user, if the room has space then the room is selected.
+        * @param  {Event} ev event that trigger the function
+        */
         function drop(ev) {
             var data = ev.dataTransfer.getData("text");
             if (ev.target.id != "user-name") {
@@ -496,7 +499,10 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
 
         }
       )
-
+        /**
+        * Check if a room is full or not.
+        * @param  {Number} room Number of the checked room.
+        */
         function checkOcupation(room) {
             fetch('/ocupationcheck?room=' + room + '&user=' + user.username).then(response => {
                 console.log(response)
