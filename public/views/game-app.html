@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
     <style>
         #wrapper-main {
@@ -104,7 +105,7 @@
             align-items: center;
             font-family: 'Courier New', Courier, monospace;
             font-size: 17px;
-            padding: 20px 0px 20px 0px;
+            padding: 0px 0px 20px 0px;
         }
 
         .wrapper-rooms {
@@ -279,13 +280,14 @@
                     <spam> To start playing choose a room.</spam>
                     <spam>In each room you can play up to two players maximum.</spam>
                     <spam>Drag an drop your avatar to choose one room.</spam>
+                    <spam><i class="fas fa-lg fa-user-friends"></i>Room is full <i class="fas fa-lg fa-user-alt"></i>One person in the room <i class="fas fa-lg fa-user-alt-slash"></i>Room is empty</spam>
                 </div>
             </div>
             <div class="wrapper-rooms">
                 <div class="container-rooms" id="containerRooms">
-                    <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                    <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                    <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i id="oroom1"></i></div>
+                    <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i id="oroom2"></i></div>
+                    <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i id="oroom3"></i></div>
                 </div>
             </div>
         </div>
@@ -364,7 +366,7 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
                         $("#myModal").modal("show");
                         //alert("Desconectado correctamente");
                         localStorage.removeItem(room);
-                        document.getElementById(room).innerHTML='';
+                        document.getElementById(room).innerHTML='<i id="o'+room+'"></i>';
                         document.getElementById(room).style.backgroundColor='rgb(58, 140, 255)';
                     }
                     else {
@@ -493,11 +495,39 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
             }
 
         }
+      )
 
+        function checkOcupation(room) {
+            fetch('/ocupationcheck?room=' + room + '&user=' + user.username).then(response => {
+                console.log(response)
+                    if (response.status==200) {
+                        document.getElementById('o'+room).classList.add("fas");
+                        document.getElementById('o'+room).classList.add("fa-user-alt-slash");
+                        document.getElementById('o'+room).classList.remove("fa-user-alt");
+                        document.getElementById('o'+room).classList.remove("fa-user-friends");
+                        document.getElementById('o'+room).classList.add("fa-7x");
 
+                   }
+                    else if (response.status==201) { 
+                        document.getElementById('o'+room).classList.add("fas");
+                        document.getElementById('o'+room).classList.add("fa-user-alt");
+                        document.getElementById('o'+room).classList.remove("fa-user-alt-slash");
+                        document.getElementById('o'+room).classList.remove("fa-user-friends");
+                        document.getElementById('o'+room).classList.add("fa-7x");
+                     }
+                     else if (response.status==403) { 
+                        document.getElementById('o'+room).classList.add("fas");
+                        document.getElementById('o'+room).classList.add("fa-user-friends");
+                        document.getElementById('o'+room).classList.remove("fa-user-alt");
+                        document.getElementById('o'+room).classList.remove("fa-user-alt-slash");
+                        document.getElementById('o'+room).classList.add("fa-7x");
 
-            
-        )
+                     }
+                })
+        }
+        setInterval(function() {checkOcupation("room1",user.username)}, 1000);
+        setInterval(function() {checkOcupation("room2",user.username)}, 1000);
+        setInterval(function() {checkOcupation("room3",user.username)}, 1000);
     </script>
 
 </body>

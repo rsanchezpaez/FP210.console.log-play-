@@ -108,6 +108,21 @@ function disconnect(response, postData, idpath) {
     }
     response.end();
 }
+function ocupationcheck(response, postData, idpath) {
+    var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+    console.log(chosen_room)
+    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+        response.writeHead(403, { "Content-Type": "text/html" });
+    }
+    else if (chosen_room.player1 == '' && chosen_room.player2 == '') {
+        response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else {
+        response.writeHead(201, { "Content-Type": "text/html" });
+    }
+    response.end();
+
+}
 function ocupation(response, postData, idpath) {
 
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
@@ -174,6 +189,7 @@ exports.gameApp = gameApp;
 exports.serveImg = serveImg;
 exports.ocupation = ocupation;
 exports.disconnect = disconnect;
+exports.ocupationcheck = ocupationcheck;
 
 
 

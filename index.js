@@ -12,4 +12,5 @@ handle["/validated-register"]=requestHandlers.validatedRegister;
 handle["/assets/avatars"]= requestHandlers.serveImg;
 handle["/ocupation"]= requestHandlers.ocupation;
 handle["/disconnect"]= requestHandlers.disconnect;
+handle["/ocupationcheck"]= requestHandlers.ocupationcheck;
 server.init(router.route, handle);
