@@ -279,9 +279,9 @@
             </div>
             <div class="wrapper-rooms">
                 <div class="container-rooms" id="containerRooms">
-                    <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i id="oroom1"></i></div>
-                    <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i id="oroom2"></i></div>
-                    <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i id="oroom3"></i></div>
+                    <div id="room1" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i style="margin-top:80px" id="oroom1"></i></div>
+                    <div id="room2" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i style="margin-top:80px" id="oroom2"></i></div>
+                    <div id="room3" class="room" ondrop="drop(event)" ondragover="allowDrop(event)"><i style="margin-top:80px" id="oroom3"></i></div>
                 </div>
             </div>
         </div>
@@ -511,7 +511,7 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
                         document.getElementById('o'+room).classList.add("fa-user-alt-slash");
                         document.getElementById('o'+room).classList.remove("fa-user-alt");
                         document.getElementById('o'+room).classList.remove("fa-user-friends");
-                        document.getElementById('o'+room).classList.add("fa-7x");
+                        document.getElementById('o'+room).classList.add("fa-2x");
 
                    }
                     else if (response.status==201) { 
@@ -519,14 +519,14 @@ $('#myModal').on('click', 'button.close', function (eventObject) {
                         document.getElementById('o'+room).classList.add("fa-user-alt");
                         document.getElementById('o'+room).classList.remove("fa-user-alt-slash");
                         document.getElementById('o'+room).classList.remove("fa-user-friends");
-                        document.getElementById('o'+room).classList.add("fa-7x");
+                        document.getElementById('o'+room).classList.add("fa-2x");
                      }
                      else if (response.status==403) { 
                         document.getElementById('o'+room).classList.add("fas");
                         document.getElementById('o'+room).classList.add("fa-user-friends");
                         document.getElementById('o'+room).classList.remove("fa-user-alt");
                         document.getElementById('o'+room).classList.remove("fa-user-alt-slash");
-                        document.getElementById('o'+room).classList.add("fa-7x");
+                        document.getElementById('o'+room).classList.add("fa-2x");
 
                      }
                 })
