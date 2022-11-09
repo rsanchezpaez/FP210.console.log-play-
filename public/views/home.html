@@ -75,7 +75,7 @@
 </head>
 
 <body>
-
+    
     <div class="wrapper-main">
         <div class="wrapper-content">
             <div id="helper" class="helper-wrapper">
@@ -118,6 +118,10 @@
             var username = document.getElementById('email').value;
             var password = document.getElementById('password').value;
 
+            //utilizamos fetch para hacer una petición asíncrona http. En este caso con método POST
+            //devolverá una promesa. Cuando reciba la respuesta pasará al .then
+            //si la respuesta es correcta (pasa correctamente la funcion login de requestHandlers.js) almacena el usuario en localStorage y pasa a la ventana de game-app
+            //si la respuesta es incorrecta salta el div con id "helper"
             fetch('/login', {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -125,6 +129,7 @@
                     username: username,
                     password: password
                 })
+                //pasamos al .then una función callback donde el parametro response es la respuesta que nos devuelve el uso del fetch
             }).then(response => {
                 if (response.ok) {
                     var user =JSON.parse(localStorage.getItem("User"));

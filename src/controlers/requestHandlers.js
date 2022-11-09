@@ -1,10 +1,16 @@
+/*Utilizamos este archivo para aglomerar las diferentes funciones que utilizaremos
+para trabajar con cada manipulador de petición. Combinamos estos manipuladores con el enrutado
+*/
 var querystring = require("querystring");
-var fs = require("fs");
-const Room = require('../models/Room')
+var{readFile}= require("fs");
+const Room = require('../models/Room');
 const Player = require('../models/Player');
 const Game = require("../models/Game");
 
+//Declaración de Array de Usuarios Registrados
 var userRegisters = new Array();
+
+//Declaramos y llenamos el Array de Salas
 var rooms = new Array();
 let room1 = new Room("room1", "Room 1", "", "");
 let room2 = new Room("room2", "Room 2", "", "");
@@ -16,17 +22,20 @@ rooms.push(room3);
 
 function init(response) {
 
-
-    fs.readFile("public/views/home.html", function (err, data) {
+    //Usamos fs.readFile para leer el contenido del html del home
+    //Hemos desestructurado el procedimiento readFile de fs para no tener que descargar el módulo entero
+    readFile("public/views/home.html", function (err, data) {
         if (err) {
             throw err;
         }
+        //renderizamos el html 
         response.writeHead(200, { "Content-Type": "text/html" });
         response.write(data);
         response.end();
     })
 }
 
+//Cuando hagamos el fetch de la ruta de validación de registro (desde register.html) comprobamos si el registro es válido. 
 function validatedRegister(response, postData) {
 
     var myJSON = JSON.parse(postData);
@@ -56,6 +65,7 @@ function validatedRegister(response, postData) {
     }
 }
 
+//Cuando hagamos el fetch de la ruta de login (desde home.html) comprobamos si el registro es válido. 
 function login(response, postData) {
     var myJson = JSON.parse(postData);
     var username = myJson.username;
@@ -83,8 +93,9 @@ function login(response, postData) {
     }
 }
 
+//leemos el html de register cuando se haga una petición de /register
 function register(response) {
-    fs.readFile("public/views/register.html", function (err, data) {
+    readFile("public/views/register.html", function (err, data) {
         if (err) {
             throw err;
         }
@@ -94,8 +105,9 @@ function register(response) {
     })
 
 }
+//leemos el html de register cuando se haga una petición de /gameApp
 function gameApp(response) {
-    fs.readFile("public/views/game-app.html", function (err, data) {
+    readFile("public/views/game-app.html", function (err, data) {
         if (err) {
             throw err;
         }
@@ -105,6 +117,8 @@ function gameApp(response) {
         response.end();
     })
 }
+//funcion preparada para cuando desde game-app se utiliza la función getOutRoom
+//hay que pasarle el id de la room. Limpia los datos del usuario de la clase Room
 function disconnect(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     console.log(chosen_room);
@@ -124,6 +138,8 @@ function disconnect(response, postData, idpath) {
     }
     response.end();
 }
+//funcion preparada para cuando desde game-app se utiliza la función checkOcupation
+//hay que pasarle el id de la room. Limpia los datos del usuario de la clase Room
 function ocupationcheck(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     if (chosen_room.player1 != '' && chosen_room.player2 != '') {
@@ -138,6 +154,8 @@ function ocupationcheck(response, postData, idpath) {
     response.end();
 
 }
+//funcion preparada para cuando desde game-app se utiliza la función drop y se hace un .fetch de la ocupación de una room concreta
+//hay que pasarle el id de la room.
 function ocupation(response, postData, idpath) {
 
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
@@ -159,7 +177,6 @@ function ocupation(response, postData, idpath) {
 
 
 function serveImg(response, postData, idpath) {
-
     let img = "src/assets/avatars/guerrera.png"
     if (idpath === "2") {
         img = "src/assets/avatars/guerrero.png"
@@ -182,7 +199,7 @@ function serveImg(response, postData, idpath) {
     if (idpath === "8") {
         img = "src/assets/avatars/monstruo.png"
     }
-    fs.readFile(img, function (err, data) {
+    readFile(img, function (err, data) {
         if (err) {
             console.log(err)
             throw err;
@@ -193,7 +210,8 @@ function serveImg(response, postData, idpath) {
         response.end();
     })
 }
-
+//función preparada para cuando se haga un .fetch de la petición de logOut con un id de usuario
+//limpia la información sobre los jugadores de todas las salas.
 function logOut(response, postData, idpath){
 
     var userNameLogOut = idpath.replace('user=', '');
@@ -218,7 +236,7 @@ function logOut(response, postData, idpath){
         
     });
 
-    fs.readFile("public/views/home.html", function (err, data) {
+    readFile("public/views/home.html", function (err, data) {
         if (err) {
             throw err;
         }
