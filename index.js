@@ -11,5 +11,8 @@ handle["/game-app"]=requestHandlers.gameApp;
 handle["/validated-register"]=requestHandlers.validatedRegister;
 handle["/assets/avatars"]= requestHandlers.serveImg;
 handle["/ocupation"]= requestHandlers.ocupation;
+handle["/disconnect"]= requestHandlers.disconnect;
+handle["/ocupationcheck"]= requestHandlers.ocupationcheck;
+handle["/logOut"] = requestHandlers.logOut;
 
 server.init(router.route, handle);

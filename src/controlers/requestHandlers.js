@@ -2,6 +2,7 @@ var querystring = require("querystring");
 var fs = require("fs");
 const Room = require('../models/Room')
 const Player = require('../models/Player');
+const Game = require("../models/Game");
 
 var userRegisters = new Array();
 var rooms = new Array();
@@ -30,12 +31,28 @@ function validatedRegister(response, postData) {
 
     var myJSON = JSON.parse(postData);
     if (postData) {
-        var newUser = new Player(myJSON.name, myJSON.username, myJSON.password);
-        userRegisters.push(newUser);
-        //clean post data avoid duplicate records
-        postData = "";
-        response.writeHead(200, { "Content-Type": "text/html" });
-        response.end();
+        if(myJSON.name === '' || myJSON.username === '' || myJSON.password === ''){
+            response.writeHead(404, { "Content-Type": "text/html" });
+            response.end();
+        }
+       
+        if(myJSON.name !== '' && myJSON.username !== '' && myJSON.password !== ''){
+            var newUser = new Player(myJSON.name, myJSON.username, myJSON.password);
+            var userRepited = userRegisters.find(user => user.username === newUser.username);
+            if(userRepited === undefined){
+                userRegisters.push(newUser);
+                //clean post data avoid duplicate records
+                postData = "";
+                response.writeHead(200, { "Content-Type": "text/html" });
+                response.end();
+            }else{
+                response.writeHead(404, { "Content-Type": "text/html" });
+                response.end();
+            }
+           
+        }
+
+        
     }
 }
 
@@ -88,11 +105,42 @@ function gameApp(response) {
         response.end();
     })
 }
+function disconnect(response, postData, idpath) {
+    var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+    console.log(chosen_room);
+    if (chosen_room.player1 === querystring.parse(idpath)["user"]){
+        console.log(chosen_room.player1);
+        chosen_room.player1 =''; 
+        response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else if (chosen_room.player2 === querystring.parse(idpath)["user"]){
+        console.log(chosen_room.player2);
+        chosen_room.player2 =''; 
+        response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else {
+        console.log("no encontrado");
+        response.writeHead(404, { "Content-Type": "text/html" });
+    }
+    response.end();
+}
+function ocupationcheck(response, postData, idpath) {
+    var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+        response.writeHead(403, { "Content-Type": "text/html" });
+    }
+    else if (chosen_room.player1 == '' && chosen_room.player2 == '') {
+        response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else {
+        response.writeHead(201, { "Content-Type": "text/html" });
+    }
+    response.end();
 
+}
 function ocupation(response, postData, idpath) {
 
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
-    console.log(chosen_room)
     if (chosen_room.player1 != '' && chosen_room.player2 != '') {
         response.writeHead(404, { "Content-Type": "text/html" });
     }
@@ -146,6 +194,40 @@ function serveImg(response, postData, idpath) {
     })
 }
 
+function logOut(response, postData, idpath){
+
+    var userNameLogOut = idpath.replace('user=', '');
+
+    rooms.forEach(room => {
+        for (const key in room) {
+            if(key === 'player1'){
+                var value = room[key];
+                if(value === userNameLogOut){
+                    room[key] = '';
+                    console.log(rooms);
+                }
+            }
+            if(key === 'player2'){
+                var value = room[key];
+                if(value === userNameLogOut){
+                    room[key] = '';
+                    console.log(rooms);
+                }
+            }
+        }
+        
+    });
+
+    fs.readFile("public/views/home.html", function (err, data) {
+        if (err) {
+            throw err;
+        }
+        response.writeHead(200, { "Content-Type": "text/html" });
+        response.write(data);
+        response.end();
+    })
+}
+
 
 exports.init = init;
 exports.login = login;
@@ -154,7 +236,9 @@ exports.validatedRegister = validatedRegister;
 exports.gameApp = gameApp;
 exports.serveImg = serveImg;
 exports.ocupation = ocupation;
-
+exports.disconnect = disconnect;
+exports.ocupationcheck = ocupationcheck;
+exports.logOut = logOut;
 
 
 

@@ -1,6 +1,6 @@
 const User = require('./Player')
 
-class Room {
+module.exports = class Room {
   constructor(number, name, player1, player2) {
     this.number = number;
     this.name = name;
@@ -27,7 +27,7 @@ class Room {
     this.number = newNumber;
   }
 
-  setNumber(newName) {
+  setName(newName) {
     this.name = newName;
   }
 
@@ -35,7 +35,7 @@ class Room {
     this.player1 = player1;
   }
 
-  setPlayerr2(player2) {
+  setPlayer2(player2) {
     this.player2 = player2;
   }
 
@@ -51,4 +51,4 @@ class Room {
   }
 }
 
-module.exports = Room;
+
