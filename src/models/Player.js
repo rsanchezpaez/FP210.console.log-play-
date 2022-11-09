@@ -1,4 +1,3 @@
-//Clase que representa a cada jugador
 module.exports = class Player {
   constructor (name, username, password){
     this.name = name;
@@ -6,7 +5,6 @@ module.exports = class Player {
     this.password = password;
   }
 
-//Getters de los atributos
   getName() {
     return this.name;
   }
@@ -19,7 +17,6 @@ module.exports = class Player {
     return this.password
   }
 
-  //Setters de los atributos
   setName(newName){
     this.name = newName;
   }

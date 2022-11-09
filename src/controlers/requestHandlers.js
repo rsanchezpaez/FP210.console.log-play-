@@ -1,16 +1,14 @@
-/*Utilizamos este archivo para aglomerar las diferentes funciones que utilizaremos
-para trabajar con cada manipulador de petición. Combinamos estos manipuladores con el enrutado
-*/
+//Use this module to storage functions for each request handler. Combine with the router.
+
 var querystring = require("querystring");
+//fs.readFile is destructured to avoid download the whole fs module.
 var{readFile}= require("fs");
 const Room = require('../models/Room');
 const Player = require('../models/Player');
 const Game = require("../models/Game");
 
-//Declaración de Array de Usuarios Registrados
 var userRegisters = new Array();
 
-//Declaramos y llenamos el Array de Salas
 var rooms = new Array();
 let room1 = new Room("room1", "Room 1", "", "");
 let room2 = new Room("room2", "Room 2", "", "");
@@ -22,20 +20,16 @@ rooms.push(room3);
 
 function init(response) {
 
-    //Usamos fs.readFile para leer el contenido del html del home
-    //Hemos desestructurado el procedimiento readFile de fs para no tener que descargar el módulo entero
     readFile("public/views/home.html", function (err, data) {
         if (err) {
             throw err;
         }
-        //renderizamos el html 
         response.writeHead(200, { "Content-Type": "text/html" });
         response.write(data);
         response.end();
     })
 }
-
-//Cuando hagamos el fetch de la ruta de validación de registro (desde register.html) comprobamos si el registro es válido. 
+//When fetch the path of /validated-register (register.html). 
 function validatedRegister(response, postData) {
 
     var myJSON = JSON.parse(postData);
@@ -65,7 +59,7 @@ function validatedRegister(response, postData) {
     }
 }
 
-//Cuando hagamos el fetch de la ruta de login (desde home.html) comprobamos si el registro es válido. 
+//When fetch the path of /login (home.html). 
 function login(response, postData) {
     var myJson = JSON.parse(postData);
     var username = myJson.username;
@@ -93,7 +87,7 @@ function login(response, postData) {
     }
 }
 
-//leemos el html de register cuando se haga una petición de /register
+//read and load register.html when link to /register
 function register(response) {
     readFile("public/views/register.html", function (err, data) {
         if (err) {
@@ -105,7 +99,7 @@ function register(response) {
     })
 
 }
-//leemos el html de register cuando se haga una petición de /gameApp
+//read and load game.app.html when fetch to /game-app
 function gameApp(response) {
     readFile("public/views/game-app.html", function (err, data) {
         if (err) {
@@ -117,8 +111,11 @@ function gameApp(response) {
         response.end();
     })
 }
-//funcion preparada para cuando desde game-app se utiliza la función getOutRoom
-//hay que pasarle el id de la room. Limpia los datos del usuario de la clase Room
+
+        /**
+        * Wipe out user from a Room.
+        * @param  {idpath} room Number of the room.
+        */
 function disconnect(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     console.log(chosen_room);
@@ -138,8 +135,10 @@ function disconnect(response, postData, idpath) {
     }
     response.end();
 }
-//funcion preparada para cuando desde game-app se utiliza la función checkOcupation
-//hay que pasarle el id de la room. Limpia los datos del usuario de la clase Room
+        /**
+        * Check if a room is full or not.
+        * @param  {idpath} room Number of the checked room.
+        */
 function ocupationcheck(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     if (chosen_room.player1 != '' && chosen_room.player2 != '') {
@@ -154,8 +153,10 @@ function ocupationcheck(response, postData, idpath) {
     response.end();
 
 }
-//funcion preparada para cuando desde game-app se utiliza la función drop y se hace un .fetch de la ocupación de una room concreta
-//hay que pasarle el id de la room.
+        /**
+        * Ocupate a room with drag and drop event.
+        * @param  {idpath} room Number of the checked room.
+        */
 function ocupation(response, postData, idpath) {
 
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
@@ -210,8 +211,10 @@ function serveImg(response, postData, idpath) {
         response.end();
     })
 }
-//función preparada para cuando se haga un .fetch de la petición de logOut con un id de usuario
-//limpia la información sobre los jugadores de todas las salas.
+        /**
+        * Log out an user from session and wipe out room's data.
+        * @param  {idpath} registeredUser Number of the user.
+        */
 function logOut(response, postData, idpath){
 
     var userNameLogOut = idpath.replace('user=', '');

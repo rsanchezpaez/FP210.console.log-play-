@@ -209,8 +209,7 @@
         var avatarChoose = document.getElementById("avatarChoose");
         var pressed = false;
        
-        
-        //Añadimos un evento click a un boton que devuelva el avatar escogido.
+        //We add a click event to a buttom for return de choosen avatar
         avatarPicker.addEventListener("click", function () {
             console.log("pressed")
             document.getElementById('wrapper-selector').style.display = 'flex';
@@ -280,9 +279,8 @@
             var password = document.getElementById('password').value;
             var name = document.getElementById('name').value;
 
-              //utilizamos fetch para hacer una petición asíncrona http. En este caso con método POST
-              //devolverá una promesa. Cuando reciba la respuesta pasará al .then
-              //si la respuesta es correcta (pasa correctamente la funcion login de requestHandlers.js) crea una nueva sesion y almacena el usuario, el avatar seleccionado, el estado de las salas y del usuario en localStorage y pasa a la ventana de home
+            //We use fetch to make a htpp asyncronous petition. POST method.
+            //if response is ok create a new session and storage data (user, avatar choosen...)
             fetch('/validated-register', {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
