@@ -13,4 +13,6 @@ handle["/assets/avatars"]= requestHandlers.serveImg;
 handle["/ocupation"]= requestHandlers.ocupation;
 handle["/disconnect"]= requestHandlers.disconnect;
 handle["/ocupationcheck"]= requestHandlers.ocupationcheck;
+handle["/logOut"] = requestHandlers.logOut;
+
 server.init(router.route, handle);

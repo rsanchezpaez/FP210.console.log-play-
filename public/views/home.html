@@ -113,7 +113,6 @@
         //TODO: THE OK RESPOSE HAVE TO GIVE THE AVATAR URL TO STORE IN LOCALSTORAGE
 
         var boton = document.querySelector("#login");
-        var isLogged = false;
         boton.addEventListener('click', function () {
 
             var username = document.getElementById('email').value;
@@ -128,24 +127,15 @@
                 })
             }).then(response => {
                 if (response.ok) {
-                    isLogged = true;
                     var user =JSON.parse(localStorage.getItem("User"));
-
-                    var newObject = {
-                        'name': user.name,
-                        'username': user.username,
-                        'isLogged': isLogged,
-                        'avatar': user.avatar
-                    }
-                   
-                    localStorage.setItem('User', JSON.stringify(newObject))
+                    user.isLogged= true;
+                    localStorage.setItem('User', JSON.stringify(user))
+                    
                     fetch('/game-app').then(response => {
                         window.location.assign(response.url)
                     })
                 } else {
-                    console.log("the user is incorrect or doesn exits")
                     document.getElementById('helper').style.visibility = "visible"
-
                 }
             })
         });

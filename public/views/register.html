@@ -15,8 +15,9 @@
         }
 
         .wrapper-main {
+            position:absolute;
             width: 100%;
-            height: 1200px;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -98,6 +99,28 @@
         .form-wrapper {
             display: flex;
         }
+        .helper-wrapper {
+            padding-top: 20px;
+            visibility: hidden;
+            
+            
+        }
+
+        .helper-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background-color: #ff000097;
+            border-radius: 8px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .text-helper{
+            padding: 0px;
+            margin: 0px;
+        }
     </style>
 </head>
 
@@ -140,6 +163,7 @@
             </div>
 
             <div class="mb-3">
+               
                 <div class="avatar-wrapper">
                     <div class="avatar-content" id="avatar-picker">
                         <img class="avatar" id="avatarChoose" src="/assets/avatars">
@@ -166,7 +190,12 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary btn btn-outline-warning" id="submit-button" type="submit">Sign
-                        in</button>
+                        up</button>
+                </div>
+                <div id="helper" class="helper-wrapper">
+                    <div class="helper-content">
+                        <p class="text-helper">The data entered is incorrect.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -267,13 +296,16 @@
                     var newObject = {
                         'name': name,
                         'username': username,
-                        'avatar': avatarChoose.src.replace('http://localhost:8888', '')
+                        'avatar': avatarChoose.src.replace('http://localhost:8888', ''),
+                        'isLogged': false,
+                        'room1': false,
+                        'room2': false,
+                        'room3': false
                     }
                     localStorage.setItem('User', JSON.stringify(newObject))
-                    console.log(newObject)
                     window.location.assign("/home")
                 } else {
-                    console.log("something is wrong. try it again")
+                    document.getElementById('helper').style.visibility = "visible"
                 }
             })
         })
