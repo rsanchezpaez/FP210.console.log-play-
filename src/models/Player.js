@@ -5,7 +5,6 @@ module.exports = class Player {
     this.password = password;
   }
 
-
   getName() {
     return this.name;
   }

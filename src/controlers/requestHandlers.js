@@ -1,10 +1,14 @@
+//Use this module to storage functions for each request handler. Combine with the router.
+
 var querystring = require("querystring");
-var fs = require("fs");
-const Room = require('../models/Room')
+//fs.readFile is destructured to avoid download the whole fs module.
+var{readFile}= require("fs");
+const Room = require('../models/Room');
 const Player = require('../models/Player');
 const Game = require("../models/Game");
 
 var userRegisters = new Array();
+
 var rooms = new Array();
 let room1 = new Room("room1", "Room 1", "", "");
 let room2 = new Room("room2", "Room 2", "", "");
@@ -16,8 +20,7 @@ rooms.push(room3);
 
 function init(response) {
 
-
-    fs.readFile("public/views/home.html", function (err, data) {
+    readFile("public/views/home.html", function (err, data) {
         if (err) {
             throw err;
         }
@@ -26,7 +29,7 @@ function init(response) {
         response.end();
     })
 }
-
+//When fetch the path of /validated-register (register.html). 
 function validatedRegister(response, postData) {
 
     var myJSON = JSON.parse(postData);
@@ -56,6 +59,7 @@ function validatedRegister(response, postData) {
     }
 }
 
+//When fetch the path of /login (home.html). 
 function login(response, postData) {
     var myJson = JSON.parse(postData);
     var username = myJson.username;
@@ -83,8 +87,9 @@ function login(response, postData) {
     }
 }
 
+//read and load register.html when link to /register
 function register(response) {
-    fs.readFile("public/views/register.html", function (err, data) {
+    readFile("public/views/register.html", function (err, data) {
         if (err) {
             throw err;
         }
@@ -94,8 +99,9 @@ function register(response) {
     })
 
 }
+//read and load game.app.html when fetch to /game-app
 function gameApp(response) {
-    fs.readFile("public/views/game-app.html", function (err, data) {
+    readFile("public/views/game-app.html", function (err, data) {
         if (err) {
             throw err;
         }
@@ -105,6 +111,11 @@ function gameApp(response) {
         response.end();
     })
 }
+
+        /**
+        * Wipe out user from a Room.
+        * @param  {idpath} room Number of the room.
+        */
 function disconnect(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     console.log(chosen_room);
@@ -124,6 +135,10 @@ function disconnect(response, postData, idpath) {
     }
     response.end();
 }
+        /**
+        * Check if a room is full or not.
+        * @param  {idpath} room Number of the checked room.
+        */
 function ocupationcheck(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     if (chosen_room.player1 != '' && chosen_room.player2 != '') {
@@ -138,6 +153,10 @@ function ocupationcheck(response, postData, idpath) {
     response.end();
 
 }
+        /**
+        * Ocupate a room with drag and drop event.
+        * @param  {idpath} room Number of the checked room.
+        */
 function ocupation(response, postData, idpath) {
 
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
@@ -159,7 +178,6 @@ function ocupation(response, postData, idpath) {
 
 
 function serveImg(response, postData, idpath) {
-
     let img = "src/assets/avatars/guerrera.png"
     if (idpath === "2") {
         img = "src/assets/avatars/guerrero.png"
@@ -182,7 +200,7 @@ function serveImg(response, postData, idpath) {
     if (idpath === "8") {
         img = "src/assets/avatars/monstruo.png"
     }
-    fs.readFile(img, function (err, data) {
+    readFile(img, function (err, data) {
         if (err) {
             console.log(err)
             throw err;
@@ -193,7 +211,10 @@ function serveImg(response, postData, idpath) {
         response.end();
     })
 }
-
+        /**
+        * Log out an user from session and wipe out room's data.
+        * @param  {idpath} registeredUser Number of the user.
+        */
 function logOut(response, postData, idpath){
 
     var userNameLogOut = idpath.replace('user=', '');
@@ -218,7 +239,7 @@ function logOut(response, postData, idpath){
         
     });
 
-    fs.readFile("public/views/home.html", function (err, data) {
+    readFile("public/views/home.html", function (err, data) {
         if (err) {
             throw err;
         }

@@ -1,12 +1,8 @@
-
-//SERVIDOR HTTP BASICO
-//inicio del servidor
-
-var http = require("http");
+var {createServer} = require("http");
 var url = require("url");
 
-
 function init(route, handle){
+
     function onRequest(request, response){
         var pathname = url.parse(request.url).pathname;
         var idpath = url.parse(request.url).query;
@@ -23,8 +19,8 @@ function init(route, handle){
         });
 
     }
-    
-    http.createServer(onRequest).listen(8888);
+    createServer(onRequest).listen(8888);
+    console.log("Servidor Iniciado.");
 } 
 
 exports.init = init;

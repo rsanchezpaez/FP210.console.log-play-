@@ -1,3 +1,4 @@
+//returns what requestHandlers return
 function route(handle, pathname, response, postData, idpath){
     console.log("starting to route a request to: " + pathname);
     if(typeof handle[pathname] === 'function'){

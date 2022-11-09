@@ -205,13 +205,11 @@
 
 
     <script>
-
         var avatarPicker = document.getElementById("avatar-picker");
         var avatarChoose = document.getElementById("avatarChoose");
         var pressed = false;
        
-        
-
+        //We add a click event to a buttom for return de choosen avatar
         avatarPicker.addEventListener("click", function () {
             console.log("pressed")
             document.getElementById('wrapper-selector').style.display = 'flex';
@@ -219,7 +217,6 @@
 
 
             //CHOSE AVAVATAR
-
             if (pressed == true) {
                 var avatar1 = document.getElementById("item-1");
                 avatar1.addEventListener("click", function () {
@@ -282,6 +279,8 @@
             var password = document.getElementById('password').value;
             var name = document.getElementById('name').value;
 
+            //We use fetch to make a htpp asyncronous petition. POST method.
+            //if response is ok create a new session and storage data (user, avatar choosen...)
             fetch('/validated-register', {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },

@@ -23,6 +23,7 @@ module.exports = class Room {
     return this.player2;
   }
 
+   //Setters
   setNumber(newNumber) {
     this.number = newNumber;
   }
@@ -39,6 +40,7 @@ module.exports = class Room {
     this.player2 = player2;
   }
 
+   //Users's counter for rooms
   playersInRoom() {
     let numberPlayers = 0;
     if (player1) {

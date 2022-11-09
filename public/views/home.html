@@ -75,7 +75,7 @@
 </head>
 
 <body>
-
+    
     <div class="wrapper-main">
         <div class="wrapper-content">
             <div id="helper" class="helper-wrapper">
@@ -118,6 +118,10 @@
             var username = document.getElementById('email').value;
             var password = document.getElementById('password').value;
 
+
+            //We use fetch to make a htpp asyncronous petition. POST method.
+            //if response is ok. Storage user in localStorage
+            //if response is not ok. Display the div id="helper"
             fetch('/login', {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -125,6 +129,7 @@
                     username: username,
                     password: password
                 })
+                //pass .then a callback function for the response
             }).then(response => {
                 if (response.ok) {
                     var user =JSON.parse(localStorage.getItem("User"));
