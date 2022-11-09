@@ -132,33 +132,42 @@ function disconnect(response, postData, idpath) {
 }
 function ocupationcheck(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
-    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
-        response.writeHead(403, { "Content-Type": "text/html" });
+    if( chosen_room != undefined){
+        if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+            response.writeHead(403, { "Content-Type": "text/html" });
+        }
+        else if (chosen_room.player1 == '' && chosen_room.player2 == '') {
+            response.writeHead(200, { "Content-Type": "text/html" });
+        }
+        else {
+            response.writeHead(201, { "Content-Type": "text/html" });
+        }
+    }else{
+        response.writeHead(404, { "Content-Type": "text/html" });
     }
-    else if (chosen_room.player1 == '' && chosen_room.player2 == '') {
-        response.writeHead(200, { "Content-Type": "text/html" });
-    }
-    else {
-        response.writeHead(201, { "Content-Type": "text/html" });
-    }
+    
     response.end();
 
 }
 function ocupation(response, postData, idpath) {
 
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
-    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+    if( chosen_room != undefined){
+        if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+            response.writeHead(404, { "Content-Type": "text/html" });
+        }
+        else {
+            if(chosen_room.player1 === '') {
+                chosen_room.player1 = querystring.parse(idpath)["user"]
+            }
+            else{
+                chosen_room.player2 = querystring.parse(idpath)["user"]
+            }
+    
+            response.writeHead(200, { "Content-Type": "text/html" });
+        }
+    }else{
         response.writeHead(404, { "Content-Type": "text/html" });
-    }
-    else {
-        if(chosen_room.player1 === '') {
-            chosen_room.player1 = querystring.parse(idpath)["user"]
-        }
-        else{
-            chosen_room.player2 = querystring.parse(idpath)["user"]
-        }
-
-        response.writeHead(200, { "Content-Type": "text/html" });
     }
     response.end();
 }
