@@ -108,21 +108,27 @@ function gameApp(response) {
 function disconnect(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
     console.log(chosen_room);
-    if (chosen_room.player1 === querystring.parse(idpath)["user"]){
-        console.log(chosen_room.player1);
-        chosen_room.player1 =''; 
-        response.writeHead(200, { "Content-Type": "text/html" });
-    }
-    else if (chosen_room.player2 === querystring.parse(idpath)["user"]){
-        console.log(chosen_room.player2);
-        chosen_room.player2 =''; 
-        response.writeHead(200, { "Content-Type": "text/html" });
-    }
-    else {
-        console.log("no encontrado");
+    if(chosen_room !==undefined){
+        if (chosen_room.player1 === querystring.parse(idpath)["user"]){
+            console.log(chosen_room.player1);
+            chosen_room.player1 =''; 
+            response.writeHead(200, { "Content-Type": "text/html" });
+        }
+        else if (chosen_room.player2 === querystring.parse(idpath)["user"]){
+            console.log(chosen_room.player2);
+            chosen_room.player2 =''; 
+            response.writeHead(200, { "Content-Type": "text/html" });
+        }
+        else {
+            console.log("no encontrado");
+            response.writeHead(404, { "Content-Type": "text/html" });
+        }
+       
+    }else{
         response.writeHead(404, { "Content-Type": "text/html" });
     }
     response.end();
+    
 }
 function ocupationcheck(response, postData, idpath) {
     var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
